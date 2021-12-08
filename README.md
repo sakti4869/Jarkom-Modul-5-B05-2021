@@ -24,5 +24,12 @@ Dalam praktikum kali ini kami menggunakan metode CIDR:
 - Step 5
 ![step5](https://user-images.githubusercontent.com/71221969/145153620-c4f25f97-1540-4860-b33f-d36d03022981.png)
 
-Kemudian dilakukan penghitungan:
-![cidr](https://user-images.githubusercontent.com/71221969/145153657-554abe46-a24c-4ec7-9d1b-e8bf466e0bd8.png)
+  Kemudian dilakukan penghitungan:
+  ![cidr](https://user-images.githubusercontent.com/71221969/145153657-554abe46-a24c-4ec7-9d1b-e8bf466e0bd8.png)
+
+## C. Kalian juga diharuskan melakukan Routing agar setiap perangkat pada jaringan tersebut dapat terhubung.
+Untuk melakukan routing, panggil command dibawah ini
+```
+route add -net 192.179.0.0 netmask 255.255.240.0 gw 192.179.8.2
+route add -net 192.179.16.0 netmask 255.255.248.0 gw 192.179.20.2
+```
