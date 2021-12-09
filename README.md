@@ -36,6 +36,21 @@ route add -net 192.179.16.0 netmask 255.255.248.0 gw 192.179.20.2
 Dimana `192.179.0.0` adalah subnet milik D1 sedangkan `192.179.16.0` adalah subnet milik D2
 
 ## D. Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan Elena secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya
+- Langkah 1: Install dns server pada `Doriki`
+```
+apt-get update
+apt-get install bind9 -y
+```
+- Langkah 2: Tambahkan konfigurasi pada `etc/bind/named.conf.option` dengan:
+```
+forwarders {
+    8.8.8.8;
+};
+allow-query{any;};
+```
+![image](https://user-images.githubusercontent.com/71221969/145360837-3a004d8d-1733-413f-b1e6-8e1163faa990.png)
+
+
 - Langkah 1: Install dhcp server pada `Jipangu`
   ```
   apt-get update
