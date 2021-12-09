@@ -147,12 +147,22 @@ Langkah 1: panggil command berikut pada dns server dan dhcp server
 iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
 ```
 
-Langkah 2: testing dengan melakukan ping pada server dari 4 host, dimana ping ke 4 nantinya akan di tolak oleh servernya
-- ping dari `Blueno`
+Langkah 2: testing dengan melakukan ping pada dhcp server yaitu `Jipangu` dari 4 host, dimana ping ke 4 nantinya akan di tolak oleh servernya
+- ping dari `Blueno`<br>
 ![image](https://user-images.githubusercontent.com/71221969/145365830-7e57a6db-ad46-444d-8dc7-b0802712ae1a.png)
-- ping dari `Elena`
+- ping dari `Elena`<br>
 ![image](https://user-images.githubusercontent.com/71221969/145365952-a877b1ee-7190-4947-95cb-d3908a208345.png)
-- ping dari `Chipper`
+- ping dari `Chipper`<br>
 ![image](https://user-images.githubusercontent.com/71221969/145366057-d5b3049a-8e1d-4ea6-b913-6f000014691e.png)
-- ping dari `Fukurou` akan di tolak karena pada dhcp server memang dibatasi hanya 3
+- ping dari `Fukurou` akan di tolak karena pada dhcp server memang dibatasi hanya 3<br>
 ![image](https://user-images.githubusercontent.com/71221969/145366161-440168df-bde6-4109-b991-938a2dcf8967.png)
+
+Langkah 3: testing dengan melakukan ping pada dns server yaitu `Doriki` dari 4 host, dimana ping ke 4 nantinya akan di tolak oleh servernya
+- ping dari `Blueno`<br>
+![image](https://user-images.githubusercontent.com/71221969/145368235-9e4940b2-b6cd-427f-a4f5-f5ac256788f0.png)
+- ping dari `Elena`<br>
+![image](https://user-images.githubusercontent.com/71221969/145368309-77e98596-b34f-4a4b-addc-d1709fbb0202.png)
+- ping dari `Chipper`<br>
+![image](https://user-images.githubusercontent.com/71221969/145368386-6c94a053-eab7-4788-9db8-dbf26571322f.png)
+- ping dari `Fukurou` akan di tolak karena pada dhcp server memang dibatasi hanya 3<br>
+![image](https://user-images.githubusercontent.com/71221969/145368476-3787ac72-ddb7-4b33-b6c9-938dc848a176.png)
