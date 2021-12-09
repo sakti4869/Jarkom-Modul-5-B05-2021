@@ -166,3 +166,7 @@ Langkah 3: testing dengan melakukan ping pada dns server yaitu `Doriki` dari 4 h
 ![image](https://user-images.githubusercontent.com/71221969/145368386-6c94a053-eab7-4788-9db8-dbf26571322f.png)
 - ping dari `Fukurou` akan di tolak karena pada dhcp server memang dibatasi hanya 3<br>
 ![image](https://user-images.githubusercontent.com/71221969/145368476-3787ac72-ddb7-4b33-b6c9-938dc848a176.png)
+
+## Soal 4. Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.
+
+## Soal 5. Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.
