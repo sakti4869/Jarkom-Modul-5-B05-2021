@@ -117,4 +117,42 @@ iface eth0 inet dhcp
 ```
 jangan lupa di restart, maka pada `etc/resolv.conf` akan auto terganti menjadi seperti ini:
 ![image](https://user-images.githubusercontent.com/71221969/145344950-5bb6eb69-24ac-4794-ac9e-6fd6d7a2bae3.png)
+<br>
 `192.179.4.131` adalah ip address dari dns server.
+
+## Soal 1. Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi Foosha menggunakan iptables, tetapi Luffy tidak ingin menggunakan MASQUERADE.
+Langkah 1: panggil command berikut pada `Foosha`
+```
+iptables -t nat -A POSTROUTING -s 192.179.0.0/16 -o eth0 -j SNAT --to-s 192.168.122.2
+```
+Langkah 2: testing pada topologi 
+- Elena
+![image](https://user-images.githubusercontent.com/71221969/145363692-dbac2a2b-68d1-4f7f-9ef0-34aca485b00f.png)
+- Fukurou
+![image](https://user-images.githubusercontent.com/71221969/145363809-225e2430-3c00-4b62-a4ba-f8283200a309.png)
+- Blueno
+![image](https://user-images.githubusercontent.com/71221969/145364078-8fbbc84c-ee1b-495e-a831-3bc628c665d5.png)
+- Chiper
+![image](https://user-images.githubusercontent.com/71221969/145364312-8a2e1811-d536-410b-b8ab-a3b401606a3c.png)
+
+## Soal 2. Kalian diminta untuk mendrop semua akses HTTP dari luar Topologi kalian pada server yang merupakan DHCP Server dan DNS Server demi menjaga keamanan.
+Langkah 1: panggil command berikut pada `Foosha`
+```
+iptables -A FORWARD -d 192.179.4.128/29 -i eth0 -p tcp --dport 80 -j DROP
+```
+
+## Soal 3. Karena kelompok kalian maksimal terdiri dari 3 orang. Luffy meminta kalian untuk membatasi DHCP dan DNS Server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop.
+Langkah 1: panggil command berikut pada dns server dan dhcp server
+```
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
+```
+
+Langkah 2: testing dengan melakukan ping pada server dari 4 host, dimana ping ke 4 nantinya akan di tolak oleh servernya
+- ping dari `Blueno`
+![image](https://user-images.githubusercontent.com/71221969/145365830-7e57a6db-ad46-444d-8dc7-b0802712ae1a.png)
+- ping dari `Elena`
+![image](https://user-images.githubusercontent.com/71221969/145365952-a877b1ee-7190-4947-95cb-d3908a208345.png)
+- ping dari `Chipper`
+![image](https://user-images.githubusercontent.com/71221969/145366057-d5b3049a-8e1d-4ea6-b913-6f000014691e.png)
+- ping dari `Fukurou` akan di tolak karena pada dhcp server memang dibatasi hanya 3
+![image](https://user-images.githubusercontent.com/71221969/145366161-440168df-bde6-4109-b991-938a2dcf8967.png)
