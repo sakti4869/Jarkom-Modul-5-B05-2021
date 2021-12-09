@@ -34,3 +34,69 @@ route add -net 192.179.0.0 netmask 255.255.240.0 gw 192.179.8.2
 route add -net 192.179.16.0 netmask 255.255.248.0 gw 192.179.20.2
 ```
 Dimana `192.179.0.0` adalah subnet milik D1 sedangkan `192.179.16.0` adalah subnet milik D2
+
+## D. Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan Elena secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya
+- Langkah 1: Install dhcp server pada `Jipangu`
+  ```
+  apt-get update
+  apt-get install isc-dhcp-server
+  ```
+- Langkah 2: Ubah interfaces dari dhcp server ke `eth0` pada file `etc/default/isc-dhcp-server`
+![image](https://user-images.githubusercontent.com/71221969/145342090-4a1e62a4-c0fc-4bc1-ae30-94c10af21478.png)
+
+- langkah 3: Tambahkan file konfigurasi berikut pada `etc/dhcp/dhcpd.conf`:
+```
+subnet 192.179.4.128 netmask 255.255.255.248 {
+}
+
+subnet 192.179.4.0 netmask 255.255.255.128 {
+        range 192.179.4.2 192.179.4.126;
+        option routers 192.179.4.1;
+        option broadcast-address 192.179.4.127;
+        option domain-name-servers 192.179.4.131;
+        default-lease-time 600;
+        max-lease-time 600;
+}
+
+subnet 192.179.0.0 netmask 255.255.252.0 {
+        range 192.179.0.2 192.179.3.254;
+        option routers 192.179.0.1;
+        option broadcast-address 192.179.3.255;
+        option domain-name-servers 192.179.4.131;
+        default-lease-time 600;
+        max-lease-time 600;
+}
+
+subnet 192.179.16.0 netmask 255.255.254.0 {
+        range 192.179.16.2 192.179.17.254;
+        option routers 192.179.16.1;
+        option broadcast-address 192.179.17.255;
+        option domain-name-servers 192.179.4.131;
+        default-lease-time 600;
+}
+
+subnet 192.179.18.0 netmask 255.255.255.0 {
+        range 192.179.18.2 192.179.18.254;
+        option routers 192.179.18.1;
+        option broadcast-address 192.179.18.255;
+        option domain-name-servers 192.207.4.131;
+        default-lease-time 600;
+        max-lease-time 600;
+}
+```
+- Langkah 4: Install dhcp relay pada `Water7` dan `Guanhao` karena mereka sebagai router yang terhubung dengan dhcp client
+```
+apt-get update
+apt-get install isc-dhcp-relay
+```
+setelah install tambahkan ip address dari dhcp server pada :
+![image](https://user-images.githubusercontent.com/71221969/145346216-a2c3fdd4-15ba-4415-912d-77606bbe1b4b.png)
+
+- Langkah 5: Kemudian pada network config pada DHCP client ditambahkan konfigurasi berikut:
+```
+auto eth0
+iface eth0 inet dhcp
+```
+jangan lupa di restart, maka pada `etc/resolv.conf` akan auto terganti menjadi seperti ini:
+![image](https://user-images.githubusercontent.com/71221969/145344950-5bb6eb69-24ac-4794-ac9e-6fd6d7a2bae3.png)
+`192.179.4.131` adalah ip address dari dns server.
