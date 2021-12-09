@@ -33,3 +33,4 @@ Untuk melakukan routing, panggil command dibawah ini pada `Foosha`
 route add -net 192.179.0.0 netmask 255.255.240.0 gw 192.179.8.2
 route add -net 192.179.16.0 netmask 255.255.248.0 gw 192.179.20.2
 ```
+Dimana `192.179.0.0` adalah subnet milik D1 sedangkan `192.179.16.0` adalah subnet milik D2
