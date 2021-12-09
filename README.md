@@ -1,5 +1,13 @@
 # Jarkom-Modul-5-B05-2021
 
+## Anggota Kelompok ##
+
+Aji Wahyu Admaja Utama 05111940000073
+
+Muhammad Haikal Aria Sakti 05111940000088
+
+Ivan Muhammad Nizar 05111940000052
+
 ## A. Tugas pertama kalian yaitu membuat topologi jaringan sesuai dengan rancangan yang diberikan Luffy dibawah ini:
 ![image](https://user-images.githubusercontent.com/71221969/145136562-46eca95e-7ad1-46a8-bc10-2b7db55299d2.png)
 Keterangan : 	
