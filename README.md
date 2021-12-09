@@ -126,13 +126,13 @@ Langkah 1: panggil command berikut pada `Foosha`
 iptables -t nat -A POSTROUTING -s 192.179.0.0/16 -o eth0 -j SNAT --to-s 192.168.122.2
 ```
 Langkah 2: testing pada topologi 
-- Elena
+- Elena<br>
 ![image](https://user-images.githubusercontent.com/71221969/145363692-dbac2a2b-68d1-4f7f-9ef0-34aca485b00f.png)
-- Fukurou
+- Fukurou<br>
 ![image](https://user-images.githubusercontent.com/71221969/145363809-225e2430-3c00-4b62-a4ba-f8283200a309.png)
-- Blueno
+- Blueno<br>
 ![image](https://user-images.githubusercontent.com/71221969/145364078-8fbbc84c-ee1b-495e-a831-3bc628c665d5.png)
-- Chiper
+- Chiper<br>
 ![image](https://user-images.githubusercontent.com/71221969/145364312-8a2e1811-d536-410b-b8ab-a3b401606a3c.png)
 
 ## Soal 2. Kalian diminta untuk mendrop semua akses HTTP dari luar Topologi kalian pada server yang merupakan DHCP Server dan DNS Server demi menjaga keamanan.
@@ -140,6 +140,17 @@ Langkah 1: panggil command berikut pada `Foosha`
 ```
 iptables -A FORWARD -d 192.179.4.128/29 -i eth0 -p tcp --dport 80 -j DROP
 ```
+Langkah 2: Testing 
+- install netcat di server Jipangu dan Doriki: `apt-get install netcat`
+- Pada Jipangu dan Doriki ketikkan: `nc -l -p 80`
+- Pada foosha ketikkan: nmap -p 80 192.179.4.131 atau nmap -p 192.179.4.130<br>
+Foosha:
+![image](https://user-images.githubusercontent.com/71221969/145403877-0fc5f913-572b-4836-bf3e-9ce848c9695a.png)
+![image](https://user-images.githubusercontent.com/71221969/145404013-687c219a-ac1d-4a24-8dff-7c14374722ab.png)
+Doriki:
+![image](https://user-images.githubusercontent.com/71221969/145404056-05957fd7-6e23-45b6-9654-8fd9e5d22fce.png)
+Jipangu:
+![image](https://user-images.githubusercontent.com/71221969/145404101-29670155-c754-4bb3-a051-583fd9b23bb7.png)
 
 ## Soal 3. Karena kelompok kalian maksimal terdiri dari 3 orang. Luffy meminta kalian untuk membatasi DHCP dan DNS Server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop.
 Langkah 1: panggil command berikut pada dns server dan dhcp server
