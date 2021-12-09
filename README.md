@@ -11,6 +11,30 @@ Keterangan :
 - Jumlah Host pada Elena adalah 300 host
 - Jumlah Host pada Fukurou adalah 200 host
 
+Berikut langkah-langkah untuk menginstall dns server dan dhcp server:
+- Langkah 1: Install dns server pada `Doriki`
+```
+apt-get update
+apt-get install bind9 -y
+```
+- Langkah 2: Tambahkan konfigurasi pada `etc/bind/named.conf.option` dengan:
+```
+forwarders {
+    8.8.8.8;
+};
+allow-query{any;};
+```
+![image](https://user-images.githubusercontent.com/71221969/145360837-3a004d8d-1733-413f-b1e6-8e1163faa990.png)
+
+
+- Langkah 3: Install dhcp server pada `Jipangu`
+  ```
+  apt-get update
+  apt-get install isc-dhcp-server
+  ```
+- Langkah 4: Ubah interfaces dari dhcp server ke `eth0` pada file `etc/default/isc-dhcp-server`
+![image](https://user-images.githubusercontent.com/71221969/145342090-4a1e62a4-c0fc-4bc1-ae30-94c10af21478.png)
+
 ## B. Karena kalian telah belajar subnetting dan routing, Luffy ingin meminta kalian untuk membuat topologi tersebut menggunakan teknik CIDR atau VLSM. setelah melakukan subnetting
 Dalam praktikum kali ini kami menggunakan metode CIDR:
 - Step 1
@@ -36,30 +60,9 @@ route add -net 192.179.16.0 netmask 255.255.248.0 gw 192.179.20.2
 Dimana `192.179.0.0` adalah subnet milik D1 sedangkan `192.179.16.0` adalah subnet milik D2
 
 ## D. Tugas berikutnya adalah memberikan ip pada subnet Blueno, Cipher, Fukurou, dan Elena secara dinamis menggunakan bantuan DHCP server. Kemudian kalian ingat bahwa kalian harus setting DHCP Relay pada router yang menghubungkannya
-- Langkah 1: Install dns server pada `Doriki`
-```
-apt-get update
-apt-get install bind9 -y
-```
-- Langkah 2: Tambahkan konfigurasi pada `etc/bind/named.conf.option` dengan:
-```
-forwarders {
-    8.8.8.8;
-};
-allow-query{any;};
-```
-![image](https://user-images.githubusercontent.com/71221969/145360837-3a004d8d-1733-413f-b1e6-8e1163faa990.png)
 
 
-- Langkah 1: Install dhcp server pada `Jipangu`
-  ```
-  apt-get update
-  apt-get install isc-dhcp-server
-  ```
-- Langkah 2: Ubah interfaces dari dhcp server ke `eth0` pada file `etc/default/isc-dhcp-server`
-![image](https://user-images.githubusercontent.com/71221969/145342090-4a1e62a4-c0fc-4bc1-ae30-94c10af21478.png)
-
-- langkah 3: Tambahkan file konfigurasi berikut pada `etc/dhcp/dhcpd.conf`:
+- langkah 1: Tambahkan file konfigurasi berikut pada `etc/dhcp/dhcpd.conf`:
 ```
 subnet 192.179.4.128 netmask 255.255.255.248 {
 }
@@ -99,7 +102,7 @@ subnet 192.179.18.0 netmask 255.255.255.0 {
         max-lease-time 600;
 }
 ```
-- Langkah 4: Install dhcp relay pada `Water7` dan `Guanhao` karena mereka sebagai router yang terhubung dengan dhcp client
+- Langkah 2: Install dhcp relay pada `Water7` dan `Guanhao` karena mereka sebagai router yang terhubung dengan dhcp client
 ```
 apt-get update
 apt-get install isc-dhcp-relay
@@ -107,7 +110,7 @@ apt-get install isc-dhcp-relay
 setelah install tambahkan ip address dari dhcp server pada :
 ![image](https://user-images.githubusercontent.com/71221969/145346216-a2c3fdd4-15ba-4415-912d-77606bbe1b4b.png)
 
-- Langkah 5: Kemudian pada network config pada DHCP client ditambahkan konfigurasi berikut:
+- Langkah 3: Kemudian pada network config pada DHCP client ditambahkan konfigurasi berikut:
 ```
 auto eth0
 iface eth0 inet dhcp
