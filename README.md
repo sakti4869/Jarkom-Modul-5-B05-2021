@@ -168,5 +168,21 @@ Langkah 3: testing dengan melakukan ping pada dns server yaitu `Doriki` dari 4 h
 ![image](https://user-images.githubusercontent.com/71221969/145368476-3787ac72-ddb7-4b33-b6c9-938dc848a176.png)
 
 ## Soal 4. Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.
+Langkah 1: pada `Doriki`
+- untuk chipper
+```
+iptables -A INPUT -s 192.179.0.0/22 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu -j ACCEPT
+iptables -A INPUT -s 192.179.0.0/22 -j REJECT
+```
+- untuk Blueno
+```
+iptables -A INPUT -s 192.179.4.0/25 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu -j ACCEPT
+iptables -A INPUT -s 192.179.4.0/25 -j REJECT
+```
+Langkah 2: Testing pada chipper
+- berhasil<br>
+![image](https://user-images.githubusercontent.com/71221969/145382963-dd030fad-aa30-4e4e-9e81-9c6954e52dee.png)
+- gagal<br>
+![image](https://user-images.githubusercontent.com/71221969/145386599-cc6492b5-5e94-4d06-9c12-96c9769bcac1.png)
 
 ## Soal 5. Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.
