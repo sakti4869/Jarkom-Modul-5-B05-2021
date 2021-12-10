@@ -105,7 +105,7 @@ subnet 192.179.18.0 netmask 255.255.255.0 {
         range 192.179.18.2 192.179.18.254;
         option routers 192.179.18.1;
         option broadcast-address 192.179.18.255;
-        option domain-name-servers 192.207.4.131;
+        option domain-name-servers 192.179.4.131;
         default-lease-time 600;
         max-lease-time 600;
 }
@@ -151,7 +151,7 @@ iptables -A FORWARD -d 192.179.4.128/29 -i eth0 -p tcp --dport 80 -j DROP
 Langkah 2: Testing 
 - install netcat di server Jipangu dan Doriki: `apt-get install netcat`
 - Pada Jipangu dan Doriki ketikkan: `nc -l -p 80`
-- Pada foosha ketikkan: nmap -p 80 192.179.4.131 atau nmap -p 192.179.4.130<br>
+- Pada foosha ketikkan: `nmap -p 80 192.179.4.131` atau `nmap -p 192.179.4.130`<br>
 Foosha:
 ![image](https://user-images.githubusercontent.com/71221969/145403877-0fc5f913-572b-4836-bf3e-9ce848c9695a.png)
 ![image](https://user-images.githubusercontent.com/71221969/145404013-687c219a-ac1d-4a24-8dff-7c14374722ab.png)
@@ -188,20 +188,44 @@ Langkah 3: testing dengan melakukan ping pada dns server yaitu `Doriki` dari 4 h
 
 ## Soal 4. Akses dari subnet Blueno dan Cipher hanya diperbolehkan pada pukul 07.00 - 15.00 pada hari Senin sampai Kamis.
 Langkah 1: pada `Doriki`
-- untuk chipper
+- untuk `Chipper`
 ```
 iptables -A INPUT -s 192.179.0.0/22 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu -j ACCEPT
 iptables -A INPUT -s 192.179.0.0/22 -j REJECT
 ```
-- untuk Blueno
+- untuk `Blueno`
 ```
 iptables -A INPUT -s 192.179.4.0/25 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu -j ACCEPT
 iptables -A INPUT -s 192.179.4.0/25 -j REJECT
 ```
-Langkah 2: Testing pada chipper
+Langkah 2: Testing pada `Chipper`
 - berhasil<br>
 ![image](https://user-images.githubusercontent.com/71221969/145382963-dd030fad-aa30-4e4e-9e81-9c6954e52dee.png)
 - gagal<br>
 ![image](https://user-images.githubusercontent.com/71221969/145386599-cc6492b5-5e94-4d06-9c12-96c9769bcac1.png)
+Langkah 3: Testing pada `Blueno`
+- berhasil<br>
+![image](https://user-images.githubusercontent.com/71221969/145497155-3e8f3a8d-9ab5-49b0-8945-5fab29275209.png)
+- gagal<br>
+![image](https://user-images.githubusercontent.com/71221969/145497201-99b042a7-e8d1-4702-a3e6-10209f08a28c.png)
 
 ## Soal 5. Akses dari subnet Elena dan Fukuro hanya diperbolehkan pada pukul 15.01 hingga pukul 06.59 setiap harinya.
+Langkah 1: pada `Doriki`
+- untuk `Elena`
+```
+iptables -A INPUT -s 192.179.16.0/23 -m time --timestart 07:00 --timestop 15:00 -j REJECT
+```
+- untuk `Fukurou`
+```
+iptables -A INPUT -s 192.179.18.0/24 -m time --timestart 07:00 --timestop 15:00 -j REJECT
+```
+Langkah 2: Testing pada `Elena`
+- berhasil<br>
+![image](https://user-images.githubusercontent.com/71221969/145495422-e27865c3-2f37-4062-b010-5cfc8202f827.png)
+- gagal<br>
+![image](https://user-images.githubusercontent.com/71221969/145495225-c4c5f5a1-3d26-479b-93fb-57a7d2f89dfe.png)
+Langkah 3: Testing pada `Fukurou`
+- berhasil<br>
+![image](https://user-images.githubusercontent.com/71221969/145495587-04969f1d-e8c5-4776-8894-eed7a2d08efb.png)
+- gagal<br>
+![image](https://user-images.githubusercontent.com/71221969/145497035-3d13aa84-8723-47b3-8da0-8accf181e8c3.png)
