@@ -226,7 +226,7 @@ Langkah 2: Testing pada `Elena`
 ![image](https://user-images.githubusercontent.com/71221969/145495225-c4c5f5a1-3d26-479b-93fb-57a7d2f89dfe.png)
 <br>
 Langkah 3: Testing pada `Fukurou`<br>
-- berhasil
+- berhasil<br>
 ![image](https://user-images.githubusercontent.com/71221969/145495587-04969f1d-e8c5-4776-8894-eed7a2d08efb.png)
 - gagal
 ![image](https://user-images.githubusercontent.com/71221969/145497035-3d13aa84-8723-47b3-8da0-8accf181e8c3.png)
@@ -250,3 +250,27 @@ Langkah 3: Testing pada `Fukurou`<br>
         ```
     4. Lalu edit file `/etc/bind/jarkom/jarkomb05.com`
         ![image](https://user-images.githubusercontent.com/71221969/145499877-81c9611f-d136-4030-b722-157e9c5ccfba.png)
+- pada `Guanhao`
+```
+iptables -A PREROUTING -t nat -p tcp -d 192.179.21.1 --dport 80 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.179.19.2:80
+iptables -A PREROUTING -t nat -p tcp -d 192.179.21.1 --dport 80 -j DNAT --to-destination 192.179.19.3:80
+iptables -t nat -A POSTROUTING -p tcp -d 192.179.19.2 --dport 80 -j SNAT --to-source 192.179.21.1:80
+iptables -t nat -A POSTROUTING -p tcp -d 192.179.19.3 --dport 80 -j SNAT --to-source 192.179.21.1:80
+```
+- Testing
+    - Pada `Guanhao`, `Jorge`, `Maingate`, `Elena` dan `Fukurou` install `apt-get install netcat`
+    - Pada Jorge ketikkan perintah: `nc -l -p 80`
+    - Pada Maingate ketikkan perintah: `nc -l -p 80`
+    - Pada client Elena dan fukurou ketikkan perintah: `nc 192.179.21.1 80`
+    - Ketikkan sembarang pada client Elena dan fukurou, nanti akan muncul bergantian
+- Pada `Elena`<br>
+![image](https://user-images.githubusercontent.com/71221969/145501511-7504937b-82c2-4376-8a80-e24b6afa3f9d.png)
+- Pada `Fukurou`<br>
+![image](https://user-images.githubusercontent.com/71221969/145501554-da1dcb3a-542a-4b34-a2a7-bffacee30b8d.png)
+- Pada `Jorge`<br>
+![image](https://user-images.githubusercontent.com/71221969/145501591-c2f8cfc7-9ee6-4fa7-82c0-30d356e4d2b5.png)
+- Pada `Maingate`<br>
+![image](https://user-images.githubusercontent.com/71221969/145501633-6657c2b8-49d8-47aa-89ff-8cfa76d0fb20.png)
+
+## Kendala:
+- Sempat mengalami kendala dalam testing pada nomor 2 dan nomor 6
