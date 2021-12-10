@@ -152,12 +152,12 @@ Langkah 2: Testing
 - install netcat di server Jipangu dan Doriki: `apt-get install netcat`
 - Pada Jipangu dan Doriki ketikkan: `nc -l -p 80`
 - Pada foosha ketikkan: `nmap -p 80 192.179.4.131` atau `nmap -p 192.179.4.130`<br>
-Foosha:
+Foosha:<br>
 ![image](https://user-images.githubusercontent.com/71221969/145403877-0fc5f913-572b-4836-bf3e-9ce848c9695a.png)
 ![image](https://user-images.githubusercontent.com/71221969/145404013-687c219a-ac1d-4a24-8dff-7c14374722ab.png)
-Doriki:
+<br>Doriki:<br>
 ![image](https://user-images.githubusercontent.com/71221969/145404056-05957fd7-6e23-45b6-9654-8fd9e5d22fce.png)
-Jipangu:
+<br>Jipangu:<br>
 ![image](https://user-images.githubusercontent.com/71221969/145404101-29670155-c754-4bb3-a051-583fd9b23bb7.png)
 
 ## Soal 3. Karena kelompok kalian maksimal terdiri dari 3 orang. Luffy meminta kalian untuk membatasi DHCP dan DNS Server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan menggunakan iptables, selebihnya didrop.
@@ -224,8 +224,29 @@ Langkah 2: Testing pada `Elena`
 ![image](https://user-images.githubusercontent.com/71221969/145495422-e27865c3-2f37-4062-b010-5cfc8202f827.png)
 - gagal<br>
 ![image](https://user-images.githubusercontent.com/71221969/145495225-c4c5f5a1-3d26-479b-93fb-57a7d2f89dfe.png)
-Langkah 3: Testing pada `Fukurou`
-- berhasil<br>
+<br>
+Langkah 3: Testing pada `Fukurou`<br>
+- berhasil
 ![image](https://user-images.githubusercontent.com/71221969/145495587-04969f1d-e8c5-4776-8894-eed7a2d08efb.png)
-- gagal<br>
+- gagal
 ![image](https://user-images.githubusercontent.com/71221969/145497035-3d13aa84-8723-47b3-8da0-8accf181e8c3.png)
+
+## Soal 6. Karena kita memiliki 2 Web Server, Luffy ingin Guanhao disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada Jorge dan Maingate
+- pada `Doriki`:
+    1. membuat domain (DNS) yang mengarah ke IP random (dalam hal ini `192.179.21.1`) pada file `/etc/bind/named.conf`
+        ```
+        zone "jarkomb05.com" {
+            type master;
+            file "/etc/bind/jarkom/jarkomb05.com";
+        };
+        ```
+    2. Buat folder jarkom dengan command:
+        ```
+        mkdir /etc/bind/jarkom
+        ```
+    3. Lalu copy `db.local` ke file `/etc/bind/jarkom/jarkomb05.com`
+        ```
+        cp /etc/bind/db.local /etc/bind/jarkom/jarkomb05.com
+        ```
+    4. Lalu edit file `/etc/bind/jarkom/jarkomb05.com`
+        ![image](https://user-images.githubusercontent.com/71221969/145499877-81c9611f-d136-4030-b722-157e9c5ccfba.png)
