@@ -198,12 +198,12 @@ iptables -A INPUT -s 192.179.0.0/22 -j REJECT
 iptables -A INPUT -s 192.179.4.0/25 -m time --timestart 07:00 --timestop 15:00 --weekdays Mon,Tue,Wed,Thu -j ACCEPT
 iptables -A INPUT -s 192.179.4.0/25 -j REJECT
 ```
-Langkah 2: Testing pada `Chipper`
+Langkah 2: Testing pada `Chipper`<br>
 - berhasil<br>
 ![image](https://user-images.githubusercontent.com/71221969/145382963-dd030fad-aa30-4e4e-9e81-9c6954e52dee.png)
 - gagal<br>
 ![image](https://user-images.githubusercontent.com/71221969/145386599-cc6492b5-5e94-4d06-9c12-96c9769bcac1.png)
-Langkah 3: Testing pada `Blueno`
+Langkah 3: Testing pada `Blueno`<br>
 - berhasil<br>
 ![image](https://user-images.githubusercontent.com/71221969/145497155-3e8f3a8d-9ab5-49b0-8945-5fab29275209.png)
 - gagal<br>
@@ -219,7 +219,7 @@ iptables -A INPUT -s 192.179.16.0/23 -m time --timestart 07:00 --timestop 15:00 
 ```
 iptables -A INPUT -s 192.179.18.0/24 -m time --timestart 07:00 --timestop 15:00 -j REJECT
 ```
-Langkah 2: Testing pada `Elena`
+Langkah 2: Testing pada `Elena`<br>
 - berhasil<br>
 ![image](https://user-images.githubusercontent.com/71221969/145495422-e27865c3-2f37-4062-b010-5cfc8202f827.png)
 - gagal<br>
