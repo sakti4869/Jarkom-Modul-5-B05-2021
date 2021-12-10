@@ -203,7 +203,7 @@ Langkah 2: Testing pada `Chipper`<br>
 ![image](https://user-images.githubusercontent.com/71221969/145382963-dd030fad-aa30-4e4e-9e81-9c6954e52dee.png)
 - gagal<br>
 ![image](https://user-images.githubusercontent.com/71221969/145386599-cc6492b5-5e94-4d06-9c12-96c9769bcac1.png)
-Langkah 3: Testing pada `Blueno`<br>
+<br>Langkah 3: Testing pada `Blueno`<br>
 - berhasil<br>
 ![image](https://user-images.githubusercontent.com/71221969/145497155-3e8f3a8d-9ab5-49b0-8945-5fab29275209.png)
 - gagal<br>
@@ -228,7 +228,7 @@ Langkah 2: Testing pada `Elena`<br>
 Langkah 3: Testing pada `Fukurou`<br>
 - berhasil<br>
 ![image](https://user-images.githubusercontent.com/71221969/145495587-04969f1d-e8c5-4776-8894-eed7a2d08efb.png)
-- gagal
+<br>- gagal
 ![image](https://user-images.githubusercontent.com/71221969/145497035-3d13aa84-8723-47b3-8da0-8accf181e8c3.png)
 
 ## Soal 6. Karena kita memiliki 2 Web Server, Luffy ingin Guanhao disetting sehingga setiap request dari client yang mengakses DNS Server akan didistribusikan secara bergantian pada Jorge dan Maingate
